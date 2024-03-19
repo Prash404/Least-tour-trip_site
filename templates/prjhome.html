@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Least Tour Trip{% endblock %}
+
+{% block content %}
+<style>
+    .route_selection input[type="radio"] {
+        display: none; 
+    }
+
+    .route_selection label {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #000;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .route_selection input[type="radio"]:checked + label {
+        background-color: #3498db;
+        color: black; 
+    }
+
+    textarea {
+        background-color: #86c1d8;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none; 
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #86c1d8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; 
+    }
+
+    input[type="submit"]:hover {
+        background-color: #3498db; 
+        color: white;
+    }
+</style>
+    <form action="/save_comment" method="post">
+        <div style="display: flex;">
+            <label for="Route">Select Route Type:</label>
+            <div class="route_selection" style="padding-left: 20px;">
+                <input type="radio" id="Air" name="Route" value="Air">
+                <label for="Air">Air</label>
+            </div>
+            <div class="route_selection">
+                <input type="radio" id="Land" name="Route" value="Land">
+                <label for="Land">Land</label><br><br>
+            </div>
+        </div>
+        <label for="cities">Enter the cities for building the tour route(Enter comma sepreted correct names of cities):</label><br>
+        <textarea id="cities" name="cities" rows="4" cols="120" required></textarea><br><br>
+
+    <input type="submit" value="Submit">
+{% endblock %}

@@ -1,0 +1,2 @@
+kolkata->patna->lucknow->delhi->mumbai->home
+Total Distance (Inverse Cost):4136.00 km

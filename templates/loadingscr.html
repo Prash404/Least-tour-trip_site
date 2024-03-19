@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Loading...{% endblock %}
+
+{% block content %}
+<style>
+    .loader {
+        border: 10px solid rgba(0, 0, 0, 0.5); /* Transparent border */
+        border-top: 10px solid #3498db; /* Blue border for animation */
+        border-radius: 50%; /* Circle shape */
+        width: 80px;
+        height: 80px;
+        animation: spin 1.5s forwards infinite; /* Animation properties */
+        margin: auto;
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        z-index: 9999; /* Ensure the loader is on top */
+        box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.49); /* Add shadow effect */
+    }
+
+    /* Keyframes for the spin animation */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+        <p style="font-size: 150%;">Generating the shortest tour trip...</p>
+        <p style="font-size: 150%;">Please wait...</p>
+        <div class="loader"></div>
+        <script>
+            function checkOutputFile() {
+                // AJAX request to check the server for updates in output.txt
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "/check_output");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            var response = xhr.responseText;
+                            if (response === "1") {
+                                // If the response indicates a change, redirect to output page
+                                window.location.replace("/output");
+                            } else {
+                                // If no change, continue checking after a delay (e.g., 2 seconds)
+                                setTimeout(checkOutputFile, 2000);
+                            }
+                        } else {
+                            console.log("Error occurred while checking the output file.");
+                        }
+                    }
+                };
+                xhr.send();
+            }
+    
+            // Start checking the output file when the page loads
+            checkOutputFile();
+        </script>
+{% endblock %}

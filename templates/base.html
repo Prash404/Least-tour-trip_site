@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Simple Header Example{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    {% block link %}{% endblock %}
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img class="siteLogo" src="{{ url_for('static', filename='logos/map.png') }}" alt="sitelogo">
+        </div>
+        <div id="pgName">
+                <h1>Least Tour Trip</h1>
+        </div>
+    </header>
+    <main>
+        
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
